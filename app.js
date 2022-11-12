@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose') // 載入 mongoose
 const exphbs = require("express-handlebars")
+const Todo = require('./models/todo')
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
@@ -28,7 +29,10 @@ db.once('open', () => {
 })
 
 app.get('/', (req, res) => {
-  res.render('index')
+  Todo.find()
+  .lean()
+  .then(todos => res.render('index', {todos}))
+  .catch(error => console.error(error))
 })
 
 app.listen(port, () => {
