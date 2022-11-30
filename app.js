@@ -18,7 +18,9 @@ require('./config/mongoose')
 
 const app = express()
 
-const port = 3000
+//若要上傳heroku port會由heroku決定
+// const port = 3000
+const PORT = process.env.PORT || 3000
 
 // 取得資料庫連線狀態
 // const db = mongoose.connection
@@ -103,6 +105,6 @@ app.use(routes)
 
 
 
-app.listen(port, () => {
-  console.log(`Express is running on http://localhost:${port}.`)
+app.listen(PORT, () => {
+  console.log(`Express is running on http://localhost:${PORT}.`)
 })
