@@ -1,7 +1,7 @@
 const express = require('express')
 
 // const mongoose = require('mongoose') // 載入 mongoose
-//一定要這行↓
+
 // require('dotenv').config({ path: '.env' })
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
