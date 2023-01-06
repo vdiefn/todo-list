@@ -1,5 +1,5 @@
 const express = require('express')
-
+const session = require('express-session')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -11,10 +11,17 @@ const methodOverride = require('method-override')
 const routes = require('./routes')
 require('./config/mongoose')
 
+
 const app = express()
 
 //若要上傳heroku port會由heroku決定
 const PORT = process.env.PORT || 3000
+
+app.use(session({
+  secret: 'ThisIsMySecret',
+  resave: false,
+  saveUninitialized: true
+}))
 
 app.use(methodOverride('_method'))
 
