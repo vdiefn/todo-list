@@ -34,6 +34,13 @@ app.use(bodyParser.urlencoded({ extended: true }))
 
 //呼叫passport並傳入app，要寫在路由之前
 usePassport(app)
+//設定本地變數res.locals
+app.use((req, res, next) => {
+  console.log(req.user)
+  res.locals.isAuthenticated = req.isAuthenticated()
+  res.locals.user = req.user
+  next()
+})
 
 app.use(routes)
 
