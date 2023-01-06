@@ -3,8 +3,13 @@ const router = express.Router()
 const User = require('../../models/user')
 const passport = require('passport')
 
+
+router.get('/login', (req, res) => {
+  res.render('login')
+})
+
 //修改並設定登入路由，驗證登入狀態
-router.get('/login', passport.authenticate('local', {
+router.post('/login', passport.authenticate('local', {
   successRedirect: '/',
   failureRedirect: '/users/login'
 }))
@@ -31,6 +36,12 @@ router.post('/register', (req, res) => {
 
 router.get('/register', (req, res) => {
   res.render('register')
+})
+
+//新增登出路由
+router.get('/logout', (req, res) => {
+  req.logout()
+  res.redirect('/users/login')
 })
 
 module.exports = router
