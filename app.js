@@ -1,5 +1,7 @@
 const express = require('express')
 const session = require('express-session')
+//載入passport設定檔，寫在express-session之後
+const usePassport = require('./config/passport')
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config()
 }
@@ -29,6 +31,9 @@ app.engine("hbs", exphbs({ defaultLayout: 'main', extname: ".hbs" }))
 app.set('view engine', 'hbs')
 
 app.use(bodyParser.urlencoded({ extended: true }))
+
+//呼叫passport並傳入app，要寫在路由之前
+usePassport(app)
 
 app.use(routes)
 
