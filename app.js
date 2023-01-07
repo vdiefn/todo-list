@@ -18,10 +18,10 @@ const flash = require('connect-flash')
 const app = express()
 
 //若要上傳heroku port會由heroku決定
-const PORT = process.env.PORT || 3000
+const PORT = process.env.PORT
 
 app.use(session({
-  secret: 'ThisIsMySecret',
+  secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true
 }))
